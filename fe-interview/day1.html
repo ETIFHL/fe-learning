@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Day1</title>
+  <link rel="stylesheet/less" href="./day1.less">
+  <script src="./less.min.js"></script>
+</head>
+<body id="day1">
+<section title="html">
+  <h4>[html] 第1天 页面导入样式时，使用link和@import有什么区别？</h4>
+  <article>
+    <p>区别：</p>
+    <ol>
+      <li>link是HTML标签，@import是css提供的。</li>
+      <li>link引入的样式页面加载时同时加载，@import引入的样式需等页面加载完成后再加载。</li>
+      <li>link没有兼容性问题，@import不兼容ie5以下。</li>
+      <li>link可以通过js操作DOM动态引入样式表改变样式，而@import不可以。</li>
+    </ol>
+  </article>
+</section>
+
+<section title="css">
+  <h4>[css] 圣杯布局和双飞翼布局的理解和区别，并用代码实现</h4>
+  <div>
+    <p>区别:</p>
+    <p>圣杯布局和双飞翼布局解决问题的方案在前一半是相同的，也就是三栏全部float浮动，但左右两栏加上负margin让其跟中间栏div并排，以形成三栏布局。</p>
+    <p>不同在于解决”中间栏div内容不被遮挡“问题的思路不一样：圣杯布局，为了中间div内容不被遮挡，将中间div设置了左右padding-left和padding-right后，将左右两个div用相对布局position: relative并分别配合right和left属性，以便左右两栏div移动后不遮挡中间div。</p>
+    <p>双飞翼布局，为了中间div内容不被遮挡，直接在中间div内部创建子div用于放置内容，在该子div里用margin-left和margin-right为左右两栏div留出位置。多了1个div，少用大致4个css属性（圣杯布局中间divpadding-left和padding-right这2个属性，加上左右两个div用相对布局position: relative及对应的right和left共4个属性，一共6个；而双飞翼布局子div里用margin-left和margin-right共2个属性，6-2=4），个人感觉比圣杯布局思路更直接和简洁一点。</p>
+  </div>
+  <article>
+    <section class="holy-grail">
+      <main class="body">
+        <div class="content"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </main>
+    </section>
+  </article>
+</section>
+
+<section title="js">
+  <h4>[js] 第1天 用递归算法实现，数组长度为5且元素的随机数在2-32间不重复的值</h4>
+  <article>
+    <p>这是一道大题目，把考点拆成了4个小项；需要侯选人用递归算法实现（限制15行代码以内实现；限制时间10分钟内完成）：</p>
+    <ol>
+      <li>生成一个长度为5的空数组arr。</li>
+      <li>生成一个（2－32）之间的随机整数rand。</li>
+      <li>把随机数rand插入到数组arr内，如果数组arr内已存在与rand相同的数字，则重新生成随机数rand并插入到arr内[需要使用递归实现，不能使用for/while等循环]</li>
+      <li>最终输出一个长度为5，且内容不重复的数组arr。</li>
+    </ol>
+    <p id="output"></p>
+    <pre id="code"></pre>
+  </article>
+</section>
+<script>
+  function generator(arr, len, min, max) {
+    let n = parseInt(Math.random() * (max - min + 1) + min)
+    if(!arr.includes(n)) arr.push(n)
+    return arr.length === len ? arr : generator(arr,len, min, max)
+  }
+  const arr = generator([], 5, 2, 32)
+  output.innerHTML = arr.toString()
+  code.innerHTML = generator.toString()
+</script>
+</body>
+</html>

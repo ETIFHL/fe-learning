@@ -1,0 +1,25 @@
+#day1 {
+    .holy-grail{
+        border: 2px solid blue;
+        main {
+            display: flex;
+            height: 300px;
+            div {
+                margin: 0 3px;
+                background: aquamarine;
+            }
+            .content {
+                order: 1;
+                flex-grow: 1;
+            }
+            .left {
+                order: 0;
+                flex-basis: 100px;
+            }
+            .right {
+                order: 2;
+                flex-basis: 100px;
+            }
+        }
+    }
+}
