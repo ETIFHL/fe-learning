@@ -13,8 +13,15 @@ class EventEmitter {
 
   emit(type, ...args) {
     if (this.event[type]) {
-      this.event[type].map(i => i.apply(this, args))
+      this.event[type].forEach(i => i.apply(this, args))
     }
+  }
+
+  once(type, fn) {
+    this.on(type, (...args) => {
+      fn(args)
+      this.off(type)
+    })
   }
 
   off(type) {
