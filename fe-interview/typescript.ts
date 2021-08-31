@@ -9,10 +9,10 @@
 export function measure(target: any, name: any, descriptor: any) {
   const oldValue = descriptor.value
 
-  descriptor.value = async function () {
+  descriptor.value = async function (...args) {
     const startTime = Date.now()
 
-    const res = await oldValue.apply(this, arguments)
+    const res = await oldValue.apply(this, args)
 
     console.log(`${name}, 执行耗时： ${Date.now() - startTime}`)
 
